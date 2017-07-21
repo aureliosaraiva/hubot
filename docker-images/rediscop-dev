@@ -1,0 +1,9 @@
+# sudo docker build -t "creditas/rediscop-dev:alpha" -f docker-images/rediscop-dev .
+# sudo docker push creditas/rediscop-dev:alpha
+
+FROM node
+
+COPY package.json package.json
+RUN npm install
+RUN apt-get update && apt-get install -y \
+  dnsutils

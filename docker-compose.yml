@@ -1,0 +1,23 @@
+version: '2'
+services:
+  web:
+    image: creditas/rediscop-dev:alpha
+    container_name: core
+    restart: always
+    working_dir: /var/app
+    volumes:
+      - .:/var/app
+      - ~/.bash_history:/root/.bash_history
+    ports:
+      - "3000:3000"
+    environment:
+      REDISTOGO_URL: redis://shared_redis:6379
+      HEROKU_API_KEY: 7190a1e36a027689f48a9017308d65377cc6464e
+      HUBOT_GITHUB_TOKEN: 7d579d0214edd76a5a0aa6f445db5f4cc3457d51
+      HUBOT_QUEUE_PREFIX: rediscop-queue
+      HUBOT_SLACK_TOKEN: xoxb-215727115282-b1e8ru123RnSHTvI1bjXkAUn
+
+networks:
+  default:
+    external:
+      name: private_development_network

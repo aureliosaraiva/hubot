@@ -1,4 +1,87 @@
 {
+  "project-ember": {
+    "provider": "heroku",
+    "repository": "aureliosaraiva/project-ember",
+    "environments": ["production","staging"],
+
+    "heroku_staging_name": "partners-frontend-staging",
+    "heroku_production_name": "partners-frontend-production",
+    "enqueue": {
+      "default": {
+        "wait_queue": true,
+        "run_task": {
+          "task": "prepare_deploy"
+        }
+      }
+    },
+    "prepare_deploy": {
+      "default": {
+        "merge_branch": { "from": "master", "into": "$branch" },
+        "check_github_status": "(continuous-integration|ci)/.*",
+        "notify_author": {
+          "messages": [
+            "Your deployment of $app/$branch to $environment is ready!",
+            "Enter $room and type $robot ship it!"
+          ]
+        }
+      },
+      "staging": {
+        "inherit_from": "default",
+        "check_github_status": "",
+        "notify_author": { "enabled": false },
+        "run_task": {
+          "task": "ship",
+          "params": {
+            "force": true
+          }
+        }
+      }
+    },
+    "ship": {
+      "default": {
+        "deploy": "heroku",
+        "notify_author": {
+          "messages": [
+            "Shiped $app/$branch to $environment",
+            "Access $environment and check your deploy",
+            "Also enter $room and watch for rollbar exceptions",
+            "Type $robot merge it! or $robot rollback!"
+          ]
+        }
+      },
+      "production": {
+        "inherit_from": "default",
+        "deploy": "heroku_preboot"
+      },
+      "staging": {
+        "inherit_from": "default",
+        "notify_author": {
+          "messages": [
+            "Shiped $app/$branch to $environment",
+            "Access $environment and test your deploy",
+            "When you're done please type $robot queue next!"
+          ]
+        }
+      }
+    },
+    "merge": {
+      "production": {
+        "merge_pull_request": { "branch": "$branch" },
+        "queue_next": true
+      }
+    },
+    "rollback": {
+      "production": {
+        "heroku_rollback": true,
+        "notify_author": {
+          "messages": [
+            "When you're ready enter $room and type $robot ship current!",
+            "or $robot queue next! if you're not going to ship it now"
+          ]
+        }
+      }
+    }
+  },
   "hubot": {
     "provider": "heroku",
     "repository": "aureliosaraiva/hubot",

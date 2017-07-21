@@ -33,9 +33,9 @@ class ShipBot
   @APPS_FILE = process.env['HUBOT_DEPLOY_APPS_JSON'] or "apps.json"
 
   constructor: (@robot, @response, @app_name, @branch, @environment) ->
-    @room = @response.envelope.room
-    @room_id = @room["id"]
-    @user = @response.envelope.user
+    @room = @response.envelope.room or '#danger-room'
+    @room_id = @room["id"] or '123'
+    @user = @response.envelope.user or 'aureliosaraiva'
 
     applications = JSON.parse(Fs.readFileSync(@constructor.APPS_FILE).toString())
     if typeof @app_name == 'object'
