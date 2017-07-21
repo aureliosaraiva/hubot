@@ -1,5 +1,5 @@
 {
-  "rediscop": {
+  "hubot": {
     "provider": "heroku",
     "repository": "aureliosaraiva/hubot",
     "environments": ["production"],
