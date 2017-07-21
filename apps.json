@@ -1,0 +1,10 @@
+{
+  "rediscop": {
+    "provider": "heroku",
+    "repository": "aureliosaraiva/hubot",
+    "environments": ["production"],
+
+    "heroku_name": "regiscop",
+    "heroku_production_name": "regiscop"
+  }
+}
