@@ -4,7 +4,7 @@
     "repository": "aureliosaraiva/hubot",
     "environments": ["production"],
 
-    "heroku_name": "regiscop",
-    "heroku_production_name": "regiscop"
+    "heroku_name": "rediscop",
+    "heroku_production_name": "rediscop"
   }
 }
