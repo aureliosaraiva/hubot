@@ -4,7 +4,7 @@
 _ = require('underscore')
 Heroku = require('heroku-client')
 heroku = new Heroku({ token: process.env.HEROKU_API_KEY });
-heroku_app_name = "regiscop"
+heroku_app_name = "rediscop"
 github_app_name = "hubot"
 
 module.exports = (robot) ->
